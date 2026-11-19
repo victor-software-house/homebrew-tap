@@ -1,6 +1,6 @@
 cask "signd" do
-  version "0.0.13"
-  sha256 "c7835932f2b045e9c2b9943ea1bd1cb062071bb008c2ffa1ca8e957171bc91e2"
+  version "0.0.14"
+  sha256 "b1794935b8bca8c810919417bbfa90c68c7e5a0ec9155fe352e00d35445ee896"
 
   url "https://github.com/victor-software-house/signd/releases/download/v#{version}/signd.pkg"
   name "signd"
