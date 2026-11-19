@@ -12,6 +12,8 @@ cask "signd" do
     strategy :github_latest
   end
 
+  # The package installs a root daemon that keeps the app current, so brew upgrade leaves it to that daemon.
+  auto_updates true
   depends_on arch: :arm64
   depends_on macos: :tahoe
 
@@ -26,7 +28,8 @@ cask "signd" do
   end
 
   # signd service disable unregisters the login item, and launchd's job with it, while the app is still there.
-  # The package's receipt lists the login hook, so pkgutil deletes it; launchctl unloads it first.
+  # The package's receipt lists the login hook and the updater daemon, so pkgutil deletes them.
+  # launchctl unloads both first.
   # Neither uninstall nor zap touches the keys: they stay in the keychain and in iCloud,
   # and `signd key delete` removes them.
   uninstall early_script: {
@@ -34,7 +37,10 @@ cask "signd" do
               args:         ["service", "disable"],
               must_succeed: false,
             },
-            launchctl:    "com.victor-software-house.signd.login",
+            launchctl:    [
+              "com.victor-software-house.signd.login",
+              "com.victor-software-house.signd.updater",
+            ],
             pkgutil:      "com.victor-software-house.signd.pkg",
             delete:       "/Applications/Signd.app"
 
