@@ -26,6 +26,7 @@ cask "signd" do
   end
 
   # signd service disable unregisters the login item, and launchd's job with it, while the app is still there.
+  # The package's receipt lists the login hook, so pkgutil deletes it; launchctl unloads it first.
   # Neither uninstall nor zap touches the keys: they stay in the keychain and in iCloud,
   # and `signd key delete` removes them.
   uninstall early_script: {
@@ -33,6 +34,7 @@ cask "signd" do
               args:         ["service", "disable"],
               must_succeed: false,
             },
+            launchctl:    "com.victor-software-house.signd.login",
             pkgutil:      "com.victor-software-house.signd.pkg",
             delete:       "/Applications/Signd.app"
 
