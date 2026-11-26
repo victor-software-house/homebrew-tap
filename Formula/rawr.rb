@@ -4,18 +4,17 @@ class Rawr < Formula
   version "0.0.4"
   license "MIT"
 
+  # Each release builds for macOS on Apple silicon and for Linux on x64 only.
   on_macos do
-    on_arm do
-      url "https://github.com/victor-software-house/rawr/releases/download/v#{version}/rawr_#{version}_macos_arm64.tar.gz"
-      sha256 "9f3c1a161978b3b7e3b10a58845d80995a15a5721754f9f3e30ae8c0ac876529"
-    end
+    depends_on arch: :arm64
+    url "https://github.com/victor-software-house/rawr/releases/download/v#{version}/rawr_#{version}_macos_arm64.tar.gz"
+    sha256 "9f3c1a161978b3b7e3b10a58845d80995a15a5721754f9f3e30ae8c0ac876529"
   end
 
   on_linux do
-    on_intel do
-      url "https://github.com/victor-software-house/rawr/releases/download/v#{version}/rawr_#{version}_linux_x64.tar.gz"
-      sha256 "e7bb8854b78cdd3f00d943edbae73a6d72e99f3978064c52bdc50ebdc22f6dfa"
-    end
+    depends_on arch: :x86_64
+    url "https://github.com/victor-software-house/rawr/releases/download/v#{version}/rawr_#{version}_linux_x64.tar.gz"
+    sha256 "e7bb8854b78cdd3f00d943edbae73a6d72e99f3978064c52bdc50ebdc22f6dfa"
   end
 
   def install
