@@ -5,8 +5,8 @@ class Rawr < Formula
   license "MIT"
 
   # Each release builds for macOS on Apple silicon and for Linux on x64 only.
-  # depends_on arch refuses the other architecture before any download, and
-  # its url names the same tarball so that every variant loads.
+  # The arch dependency in each block refuses the other architecture before
+  # any download, and its url names the same tarball so every variant loads.
   on_macos do
     depends_on arch: :arm64
 
