@@ -26,7 +26,7 @@ brew install victor-software-house/tap/rawr
 ## Updates
 
 A release job sends a `release` dispatch here after it uploads its files.
-Its payload names the cask or the formula, the tag, the release's repository and the asset.
-A formula names one asset per platform, one per line.
+Its payload names the cask or the formula, the tag, the release's repository and the asset, or one asset per line for a formula.
+
 `.github/workflows/bump.yml` then sets the version and each sha256, and opens and merges the pull request as the Version Packages App.
-A manual run with the same values bumps a cask or a formula again.
+A manual run with the same values bumps it again.
